@@ -215,9 +215,9 @@ class BaseAgent extends Renderer {
    * calculates all the flocking code apply it to the acceleration
    */
   applyFlock(agents) {
-    let sep = this.flock.separate(agents);
-    let ali = this.flock.align(agents);
-    let coh = this.flock.cohesion(agents);
+    let sep = this.flock.calculerSeparation(agents);
+    let ali = this.flock.calculerAlignement(agents);
+    let coh = this.flock.calculerCohesion(agents);
     // let wander = this.flock.wander();
 
     sep.mult(this.flockMultiplier.separate);

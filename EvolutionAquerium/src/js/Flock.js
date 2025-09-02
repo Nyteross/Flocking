@@ -68,49 +68,49 @@ class Flock {
   }
 
   /**
-   * @method separate()
+   * @method calculerSeparation()
    * @param {Array} agents 
    * part of flocking system
    */
-  separate(agents) {
+  calculerSeparation(agents) {
     let desiredseperation = this.currentAgent.radius * 4;
-    let sum = new Vector();
+    let sum = new Vector(); 
     let count = 0;
-    for (let i = 0; i < agents.length; i++) {
-      let d = Vector.distSq(this.currentAgent.pos, agents[i].pos);
-      if ((d > 0) && (d < desiredseperation * desiredseperation)) {
-        let diff = Vector.sub(this.currentAgent.pos, agents[i].pos);
-        diff.normalize();
-        diff.div(d);
-        sum.add(diff);
+    for (let i = 0; i < agents.length; i++) {  // Parcourir tous les agents 
+      let d = Vector.distSq(this.currentAgent.pos, agents[i].pos); // Distance au carré avec l'agent i
+      if ((d > 0) && (d < desiredseperation * desiredseperation)) { // Si d est en dessous du carré de la separation voulu
+        let diff = Vector.sub(this.currentAgent.pos, agents[i].pos); // Soustraction de la position de l'agent actuel à la position de l'agent i
+        diff.normalize(); // Calcule de l'hypothénuse de la différence de position entre les deux agents et définition de la position x,y de diff à la position actuel divisé par l'hypoténuse
+        diff.div(d); // division de la différence de position entre les deux agents par le carré de la distance entre les deux agents
+        sum.add(diff); // On ajoute la position de la diff au vecteur sum
         count++;
       }
     }
     if (count > 0) {
-      sum.div(count);
+      sum.div(count); // Moyenne de des vecteurs voisins 
       return this._returnSteer(sum);
     }
     return new Vector(0, 0);
   };
 
   /**
-   * @method align()
+   * @method calculerAlignement()
    * @param {Array} agents 
    * part of flocking system
    */
-  align(agents) {
+  calculerAlignement(agents) {
     let neighbordist = 50;
     let sum = new Vector(0, 0);
     let count = 0;
-    for (let i = 0; i < agents.length; i++) {
-      let d = Vector.distSq(this.currentAgent.pos, agents[i].pos);
-      if ((d > 0) && (d < neighbordist * neighbordist)) {
-        sum.add(agents[i].vel);
+    for (let i = 0; i < agents.length; i++) { // Parcourir tous les agents
+      let d = Vector.distSq(this.currentAgent.pos, agents[i].pos); // Distance au carré avec l'agent i
+      if ((d > 0) && (d < neighbordist * neighbordist)) { // Si d est en dessous du carré de la distance entre deux voisins
+        sum.add(agents[i].vel); // On ajoute la vélocité d'un des agents au vecteur sum
         count++;
       }
     }
     if (count > 0) {
-      sum.div(count);
+      sum.div(count); // Moyenne de des vecteurs voisins 
       return this._returnSteer(sum);
     }
     return new Vector(0, 0);
@@ -122,20 +122,20 @@ class Flock {
    * @param {Array} agents 
    * part of flocking system
    */
-  cohesion(agents) {
-    let neighbordist = 30;
+  calculerCohesion(agents) {
+    let neighbordist = 30; 
     let sum = new Vector(0, 0);
     let count = 0;
-    for (let i = 0; i < agents.length; i++) {
-      let d = Vector.distSq(this.currentAgent.pos, agents[i].pos);
-      if ((d > 0) && (d < neighbordist * neighbordist)) {
-        sum.add(agents[i].pos);
+    for (let i = 0; i < agents.length; i++) { // Parcourir tous les agents
+      let d = Vector.distSq(this.currentAgent.pos, agents[i].pos); // Distance au carré avec l'agent i
+      if ((d > 0) && (d < neighbordist * neighbordist)) { // Si d est en dessous du carré de la distance entre deux voisins
+        sum.add(agents[i].pos); // On ajoute la position d'un des agents au vecteur sum
         count++;
       }
     }
     if (count > 0) {
-      sum.div(count);
-      sum.sub(this.currentAgent.pos);
+      sum.div(count); // Moyenne de des vecteurs voisins 
+      sum.sub(this.currentAgent.pos); // on soustrait la position de l'agent actuel au vecteur sum
       return this._returnSteer(sum);
     }
     return new Vector(0, 0);
