@@ -95,10 +95,16 @@ function renderItem(list, color, radius, rect) {
     ctx.closePath();
   }
 }
-
-let flk_slider_separate = document.getElementById('separate');
-let flk_slider_align = document.getElementById('align');
-let flk_slider_cohesion = document.getElementById('cohesion');
+;
+let separate_value = 1.4; // Définition de la valeur de séparation
+let align_value = 0.7; // Définition de la valeur d'alignement
+let cohesion_value = 2.1; // Définition de la valeur de cohésion
+let separate_text = document.getElementById("separate"); 
+let align_text = document.getElementById("align");
+let cohesion_text = document.getElementById("cohesion");
+separate_text.textContent = "Separation: " + separate_value //Affichage de la valeur de séparation
+align_text.textContent = "Alignement: " + align_value //Affichage de la valeur d'alignement
+cohesion_text.textContent = "Cohesion: " + cohesion_value //Affichage de la valeur de cohésion
 let renderhealth_checkbox = document.getElementById('render_health');
 let debug_checkbox = document.getElementById('debug');
 let dnadebug_checkbox = document.getElementById('dnadebug');

@@ -149,7 +149,8 @@ class EcoSystem {
   batchUpdateAgents(list, foodPoison, weight, callback) {
     for (let i = list.length - 1; i >= 0; i--) {
       list[i].update();
-      list[i].updateFlockBehavior(flk_slider_separate.value, flk_slider_align.value, flk_slider_cohesion.value);
+      console.log(separate_value);
+      list[i].updateFlockBehavior(separate_value, align_value, cohesion_value);
       list[i].applyFlock(list);
       if (foodPoison[0] !== undefined && foodPoison[1] !== undefined) {
         list[i].Behavior(foodPoison[0], foodPoison[1], weight);

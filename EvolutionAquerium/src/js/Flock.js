@@ -118,7 +118,7 @@ class Flock {
 
 
   /**
-   * @method cohesion()
+   * @method calculerCohesion()
    * @param {Array} agents 
    * part of flocking system
    */
